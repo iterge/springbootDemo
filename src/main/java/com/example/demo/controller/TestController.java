@@ -15,6 +15,7 @@ public class TestController {
     @RequestMapping("/test")
     public String test(){
         log.info("*************test************");
+        String str = "hello world";
         return "123";
     }
 }
