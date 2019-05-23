@@ -11,7 +11,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>springboot_demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<name>springboot_demo</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -55,6 +55,29 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.6.1</version>
 		</dependency>
+		<!-- java的HTML解析器 -->
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.11.3</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.googlecode.juniversalchardet/juniversalchardet -->
+		<dependency>
+			<groupId>com.googlecode.juniversalchardet</groupId>
+			<artifactId>juniversalchardet</artifactId>
+			<version>1.0.3</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-httpclient/commons-httpclient -->
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		<!-- 加入redis相关依赖 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -75,6 +98,50 @@
 						D:\Java\jdk1.8.0_202\bin\javac.exe
 					</executable>
 				</configuration>
+			</plugin>
+			<!-- 生成离线api文档-->
+			<plugin>
+				<groupId>org.asciidoctor</groupId>
+				<artifactId>asciidoctor-maven-plugin</artifactId>
+				<version>1.5.3</version>
+				<configuration>
+					<sourceDirectory>${project.basedir}/docs/asciidoc</sourceDirectory>
+					<sourceDocumentName>index.adoc</sourceDocumentName>
+					<attributes>
+						<doctype>book</doctype>
+						<toc>left</toc>
+						<toclevels>3</toclevels>
+						<numbered></numbered>
+						<hardbreaks></hardbreaks>
+						<sectlinks></sectlinks>
+						<sectanchors></sectanchors>
+						<generated>${project.build.directory}/asciidoc</generated>
+					</attributes>
+				</configuration>
+				<!-- Since each execution can only handle one backend, run
+                     separate executions for each desired output type -->
+				<executions>
+					<execution>
+						<id>output-html</id>
+						<phase>test</phase>
+						<goals>
+							<goal>process-asciidoc</goal>
+						</goals>
+						<configuration>
+							<backend>html5</backend>
+							<!--<outputDirectory>${project.basedir}/docs/asciidoc/html</outputDirectory>-->
+						</configuration>
+					</execution>
+				</executions>
+				<!-- Configure generic document generation settings -->
+				<dependencies>
+					<!-- add for SpringBoot 2 -->
+					<dependency>
+						<groupId>org.jruby</groupId>
+						<artifactId>jruby-complete</artifactId>
+						<version>1.7.26</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>

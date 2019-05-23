@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Slf4j
 @RequestMapping("/demo")
 public class Slf4jDemoController {
-    private static final Logger log = LoggerFactory.getLogger(TestController.class);
+    //private static final Logger log = LoggerFactory.getLogger(TestController.class);
     @RequestMapping(value = "/getStr",method = RequestMethod.POST)
     @ResponseBody
     public String getStr(){
