@@ -1,17 +1,23 @@
 package com.example.demo;
 
+import com.example.demo.entity.Schedule;
+import com.example.demo.service.ScheduleService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SpringbootDemoApplicationTests {
+	@Autowired
+	private ScheduleService scheduleService;
 
 	@Test
 	public void contextLoads() {
@@ -58,6 +64,18 @@ public class SpringbootDemoApplicationTests {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Test
+	public void TestJob(){
+		Schedule schedule = new Schedule();
+		schedule.setId("1");
+		schedule.setJobCron("0/5 * * * * ? ");
+		schedule.setJobGroup("Test");
+		schedule.setJobName("testjob");
+		schedule.setJobStatus("1");
+		schedule.setTs(new Date());
+		scheduleService.addJob(schedule);
 	}
 }
 
