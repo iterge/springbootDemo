@@ -1,16 +1,7 @@
 /target/
 !.mvn/wrapper/maven-wrapper.jar
+/LOG_HOME_IS_UNDEFINED/
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
